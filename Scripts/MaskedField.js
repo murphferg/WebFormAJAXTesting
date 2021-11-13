@@ -1,9 +1,6 @@
-﻿
-var unMaskTimeOutIds = {};
-var testingUnMask = {};
+﻿var unMaskTimeOutIds = {};
 
 function unMask(txtId, btnId, timeOut) {
-    // on
     setTimeout(function () {
         document.getElementById(txtId).addEventListener('input', extendMaskedFieldTimeout);
     }, 1000);
@@ -11,13 +8,26 @@ function unMask(txtId, btnId, timeOut) {
     setUnMaskTimeout(txtId, btnId, timeOut);
 }
 
-function setUnMaskTimeout(txtId, btnId, timeOut) {
-    if (unMaskTimeOutIds[txtId])
-        clearTimeout(unMaskTimeOutIds[txtId]);
-
-    unMaskTimeOutIds[txtId] = setTimeout(function () { document.getElementById(btnId).click(); }, timeOut);
+function reMask(txtId) {
+    clearUnMaskTimeout(txtId);
 }
 
+function clearUnMaskTimeout(txtId) {
+    if (unMaskTimeOutIds[txtId]) {
+        console.log("before clearTimeout(unMaskTimeOutIds[" + txtId + "]:)" + unMaskTimeOutIds[txtId]);
+        clearTimeout(unMaskTimeOutIds[txtId]);
+        unMaskTimeOutIds[txtId] = null;
+        console.log("after clearTimeout(unMaskTimeOutIds[" + txtId + "]:)" + unMaskTimeOutIds[txtId]);
+    }
+}
+
+function setUnMaskTimeout(txtId, btnId, timeOut) {
+    clearUnMaskTimeout(txtId);
+
+    console.log("before setTimeout(unMaskTimeOutIds[" + txtId + "]:)" + unMaskTimeOutIds[txtId]);
+    unMaskTimeOutIds[txtId] = setTimeout(function () { document.getElementById(btnId).click(); }, timeOut);
+    console.log("after setTimeout(unMaskTimeOutIds[" + txtId + "]:)" + unMaskTimeOutIds[txtId]);
+}
 
 function extendMaskedFieldTimeout(source) {
     var maskedInput = document.getElementById(source.target.id);

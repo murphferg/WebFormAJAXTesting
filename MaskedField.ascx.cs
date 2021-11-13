@@ -15,11 +15,15 @@ namespace AJAXTesting
     public partial class MaskedField : System.Web.UI.UserControl
     {
 
-        private string clientClickUnMaskTimeoutJs;
+        private string clientClickUnMask;
+        private string clientClickReMask;
+        private const string unMaskIcon = "<i class='fa fa-eye fa-2x'></i>";
+        private const string reMaskIcon = "<i class='fa fa-eye-slash fa-2x'></i>";
         protected void Page_Load(object sender, EventArgs e)
         {
-            clientClickUnMaskTimeoutJs = "unMask('" + txtField.ClientID + "','" + lnkButton.ClientID + "'," + Global.UnMaskTimeout + ");";
-            lnkButton.OnClientClick = clientClickUnMaskTimeoutJs;
+            clientClickUnMask = "unMask('" + txtField.ClientID + "','" + lnkButton.ClientID + "'," + Global.UnMaskTimeout + ")";
+            clientClickReMask = "reMask('" + txtField.ClientID + "')";
+            lnkButton.OnClientClick = clientClickUnMask;
             txtField.Attributes["data-is-masked"] = "true";
             txtField.Attributes["data-lnkbutton-id"] = lnkButton.ClientID;
             txtField.Attributes["data-unmask-timeout"] = Global.UnMaskTimeout;
@@ -34,7 +38,11 @@ namespace AJAXTesting
         {
             if (!IsMasked)
             {
-                lnkButton.OnClientClick = clientClickUnMaskTimeoutJs;
+                txtField.Enabled = false;
+                //lnkButton.Style["visibility"] = "visible";
+
+                lnkButton.OnClientClick = clientClickUnMask;
+                lnkButton.Text = unMaskIcon;
                 //if (ControlType == MaskedControlType.TextBox)
                 lblText.Text = MaskedValue;
                 txtField.Text = MaskedValue;
@@ -42,8 +50,10 @@ namespace AJAXTesting
             }
             else
             {
-                lnkButton.OnClientClick = "";
-                lnkButton.Style["visibility"] = "hidden";
+                lnkButton.OnClientClick = clientClickReMask;
+                lnkButton.Text = reMaskIcon;
+                //lnkButton.Style["visibility"] = "hidden";
+                txtField.Enabled = true;
 
                 lblText.Text = RandomDigits(9);
                 txtField.Text = lblText.Text;
