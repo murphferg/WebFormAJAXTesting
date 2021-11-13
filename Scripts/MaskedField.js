@@ -1,6 +1,7 @@
 ﻿var unMaskTimeOutIds = {};
 
 function unMask(txtId, btnId, timeOut) {
+    document.getElementById(txtId).removeEventListener('input', extendMaskedFieldTimeout);
     setTimeout(function () {
         document.getElementById(txtId).addEventListener('input', extendMaskedFieldTimeout);
     }, 1000);
@@ -9,6 +10,7 @@ function unMask(txtId, btnId, timeOut) {
 }
 
 function reMask(txtId) {
+    document.getElementById(txtId).removeEventListener('input', extendMaskedFieldTimeout);
     clearUnMaskTimeout(txtId);
 }
 
