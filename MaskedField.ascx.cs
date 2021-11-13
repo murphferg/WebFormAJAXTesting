@@ -1,23 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace AJAXTesting
 {
+
+    public enum MaskedControlType
+    {
+        None,
+        Label,
+        TextBox
+    }
     public partial class MaskedField : System.Web.UI.UserControl
     {
+
+        private string clientClickUnMaskTimeoutJs;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            clientClickUnMaskTimeoutJs = "unMask('" + txtField.ClientID + "','" + lnkButton.ClientID + "'," + Global.UnMaskTimeout + ");";
+            lnkButton.OnClientClick = clientClickUnMaskTimeoutJs;
+            txtField.Attributes["data-lnkbutton-id"] = lnkButton.ClientID;
+            txtField.Attributes["data-unmask-timeout"] = Global.UnMaskTimeout;
         }
 
         protected void lnkButton_Click(object sender, EventArgs e)
         {
-            lblText.Text = RandomDigits(9);
+            ToggleMask();
+        }
+
+        private void ToggleMask()
+        {
+            if (!IsMasked)
+            {
+                lnkButton.OnClientClick = clientClickUnMaskTimeoutJs;
+                //if (ControlType == MaskedControlType.TextBox)
+                    lblText.Text = MaskedValue;
+                txtField.Text = MaskedValue;
+                IsMasked = true;
+            }
+            else
+            {
+                lnkButton.OnClientClick = "";
+
+                lblText.Text = RandomDigits(9);
+                txtField.Text = lblText.Text;
+                IsMasked = false;
+            }
+            txtField.Attributes["data-is-masked"] = IsMasked.ToString().ToLower();
+        }
+
+        public string MaskedValue = "*********";
+
+        public bool IsMasked { get { return (bool)(ViewState["IsMasked"]?? true); } set { ViewState["IsMasked"] = value; } }
+
+        public MaskedControlType ControlType
+        {
+            get { return (MaskedControlType)ViewState["ControlType"]; }
+            set { ViewState["ControlType"] = value; }
         }
 
         private string RandomDigits(int length)

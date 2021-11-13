@@ -12,15 +12,16 @@ namespace AJAXTesting
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsAsync && ScriptManager1.AsyncPostBackSourceElementID.EndsWith("lnkButton"))
+            {
+                //ScriptManager1.RegisterScriptControl<>
+                return;
+            }
             lblPageLoaded.Text = "The page loaded at: " + DateTime.Now.ToLongTimeString();
             if (IsPostBack)
                 lblPageLoaded.BackColor = System.Drawing.Color.Red;
         }
 
-        protected void lnkButton_Click(object sender, EventArgs e)
-        {
-            lblText.Text = RandomDigits(9);
-        }
 
         private string RandomDigits(int length)
         {

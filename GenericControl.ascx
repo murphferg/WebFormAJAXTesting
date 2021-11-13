@@ -3,6 +3,6 @@
 <h3>Generic Control</h3>
 
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-    <ContentTemplate><uc1:MaskedField runat="server" ID="MaskedField" /></ContentTemplate>
+    <ContentTemplate><uc1:MaskedField runat="server" ID="MaskedField" ControlType="Label" /></ContentTemplate>
 </asp:UpdatePanel>
 

@@ -6,7 +6,10 @@
 
 <!DOCTYPE HTML>
 <html>
-<head><title>AJAX Testing</title></head>
+<head><title>AJAX Testing</title>
+
+    <script src="Scripts/MaskedField.js"></script>
+</head>
 <body>
 
     <form id="frmPage" runat="server" method="post">
@@ -23,41 +26,22 @@
                 <asp:Label ID="lblPageLoaded" runat="server" Text="Label"></asp:Label>
             </p>
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Force Reload" />
+            <input type="text" oninput="alert('yo')" />
         </div>
 
         <div class="row">
-            <div class="col-md-4">
-                <h2>Update Panel on the Page</h2>
-                <p>
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional" OnUnload="UpdatePanel1_Unload">
-                        <ContentTemplate>
-                            <asp:Label runat="server" Text="*********" ID="lblText" Width="70px"></asp:Label>
-                            <asp:LinkButton ID="lnkButton" runat="server" OnClick="lnkButton_Click" Text="<i class='fa fa-eye'></i>"></asp:LinkButton>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="lnkButton" EventName="Click" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                        <ContentTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server" Text="Content in Other Panel"></asp:TextBox>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-
-                </p>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h2>Update Panel on a User Control</h2>
                 <p>
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                         <ContentTemplate>
-                            <uc1:MaskedField runat="server" ID="MaskedField" />
+                            <uc1:MaskedField runat="server" ID="MaskedField" ControlType="Label" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <p>
                     </p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h2>Update Panel on a Control within a Control</h2>
                 <p>
                     <uc1:GenericControl runat="server" ID="GenericControl" />
