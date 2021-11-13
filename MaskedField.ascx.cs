@@ -20,6 +20,7 @@ namespace AJAXTesting
         {
             clientClickUnMaskTimeoutJs = "unMask('" + txtField.ClientID + "','" + lnkButton.ClientID + "'," + Global.UnMaskTimeout + ");";
             lnkButton.OnClientClick = clientClickUnMaskTimeoutJs;
+            txtField.Attributes["data-is-masked"] = "true";
             txtField.Attributes["data-lnkbutton-id"] = lnkButton.ClientID;
             txtField.Attributes["data-unmask-timeout"] = Global.UnMaskTimeout;
         }
@@ -35,13 +36,14 @@ namespace AJAXTesting
             {
                 lnkButton.OnClientClick = clientClickUnMaskTimeoutJs;
                 //if (ControlType == MaskedControlType.TextBox)
-                    lblText.Text = MaskedValue;
+                lblText.Text = MaskedValue;
                 txtField.Text = MaskedValue;
                 IsMasked = true;
             }
             else
             {
                 lnkButton.OnClientClick = "";
+                lnkButton.Style["visibility"] = "hidden";
 
                 lblText.Text = RandomDigits(9);
                 txtField.Text = lblText.Text;

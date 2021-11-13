@@ -1,20 +1,14 @@
 ﻿
 var unMaskTimeOutIds = {};
+var testingUnMask = {};
 
 function unMask(txtId, btnId, timeOut) {
-    var maskedInput = document.getElementById(txtId);
-
-    maskedInput.removeEventListener('input',extendMaskedFieldTimeout);
-
+    // on
     setTimeout(function () {
-        addMaskedListener(txtId);
+        document.getElementById(txtId).addEventListener('input', extendMaskedFieldTimeout);
     }, 1000);
 
     setUnMaskTimeout(txtId, btnId, timeOut);
-}
-
-function addMaskedListener(txtId) {
-    document.getElementById(txtId).addEventListener('input', extendMaskedFieldTimeout);
 }
 
 function setUnMaskTimeout(txtId, btnId, timeOut) {
@@ -35,5 +29,5 @@ function extendMaskedFieldTimeout(source) {
 }
 
 function pageLoad() {
-    //alert('pageLoad from MaskedField.js');
+    //change code to turn off progress bar;
 }

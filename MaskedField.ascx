@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MaskedField.ascx.cs" Inherits="AJAXTesting.MaskedField" %>
 <%@ Import Namespace="AJAXTesting" %>
+<%@ Import Namespace="System" %>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
     <ContentTemplate>
@@ -11,7 +13,3 @@
         <asp:AsyncPostBackTrigger ControlID="lnkButton" EventName="Click" />
     </Triggers>
 </asp:UpdatePanel>
-
-<script>
-    addMaskedListener('<%=txtField.ClientID%>');
-</script>
