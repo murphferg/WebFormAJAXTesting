@@ -46,8 +46,9 @@ namespace AJAXTesting
                 lnkButton.OnClientClick = clientClickUnMask;
                 lnkButton.Text = unMaskIcon;
                 //if (ControlType == MaskedControlType.TextBox)
-                lblText.Text = MaskedValue;
+                lblField.Text = MaskedValue;
                 txtField.Text = MaskedValue;
+                lnkField.Text = MaskedValue;
                 IsMasked = true;
             }
             else
@@ -57,8 +58,9 @@ namespace AJAXTesting
                 //lnkButton.Style["visibility"] = "hidden";
                 txtField.Enabled = true;
 
-                lblText.Text = RandomDigits(9);
-                txtField.Text = lblText.Text;
+                lblField.Text = RandomDigits(9);
+                txtField.Text = lblField.Text;
+                lnkField.Text = lblField.Text;
                 IsMasked = false;
             }
         }
