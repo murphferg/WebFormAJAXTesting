@@ -33,7 +33,7 @@
             <div class="col-md-6">
                 <h2>Update Panel on a User Control</h2>
                 <p>
-                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <uc1:MaskedField runat="server" ID="MaskedField" ControlType="Label" />
                         </ContentTemplate>

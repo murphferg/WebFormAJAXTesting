@@ -36,6 +36,8 @@ namespace AJAXTesting
 
         private void ToggleMask()
         {
+            txtField.Attributes["data-is-masked"] = IsMasked.ToString().ToLower();
+
             if (!IsMasked)
             {
                 txtField.Enabled = false;
@@ -59,7 +61,6 @@ namespace AJAXTesting
                 txtField.Text = lblText.Text;
                 IsMasked = false;
             }
-            txtField.Attributes["data-is-masked"] = IsMasked.ToString().ToLower();
         }
 
         public string MaskedValue = "*********";
